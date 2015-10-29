@@ -1,0 +1,41 @@
+// Use fork to spawn a new child process 
+// and then setting up a communication pipe between the parent and child 
+// (sending a message “Greetings” from the parent to the child.)
+
+char write msg[BUFFER SIZE] = "Greetings";
+  char read msg[BUFFER SIZE];
+  int fd[2];
+  pid t pid;
+  if (pipe(fd) == -1) {
+  fprintf(stderr,"Pipe failed");
+  return 1;
+}
+
+/* fork a child process */
+    pid = fork();
+
+/* error occurred */
+if (pid < 0) {
+    fprintf(stderr, "Fork Failed");
+    return 1; }
+
+/* parent process */
+if (pid > 0) { 
+    /* close the unused end of the pipe */
+    close(fd[READ END]);
+    /* write to the pipe */
+    write(fd[WRITE END], write msg, strlen(write msg)+1);
+    /* close the write end of the pipe */
+    close(fd[WRITE END]); }
+
+/* child process */
+else { 
+    /* close the unused end of the pipe */
+    close(fd[WRITE END]);
+    /* read from the pipe */
+    read(fd[READ END], read msg, BUFFER SIZE);
+    printf("read %s",read msg);
+    /* close the write end of the pipe */
+    close(fd[READ END]); }
+    return 0;
+}
