@@ -3,6 +3,11 @@
 // (sending a message “Greetings” from the parent to the child.)
 
 
+// TWO KEYS that sender and receiver need to know
+// 1. termination character after write
+// 2. declare length at the start
+
+
 int main(void)
 { char write msg[BUFFER SIZE] = "Greetings";
   char read msg[BUFFER SIZE];
