@@ -2,7 +2,9 @@
 // and then setting up a communication pipe between the parent and child 
 // (sending a message “Greetings” from the parent to the child.)
 
-char write msg[BUFFER SIZE] = "Greetings";
+
+int main(void)
+{ char write msg[BUFFER SIZE] = "Greetings";
   char read msg[BUFFER SIZE];
   int fd[2];
   pid t pid;
